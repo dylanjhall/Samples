@@ -1,0 +1,92 @@
+[
+  {
+    "id": "vTjn3EjDgIcljkmM",
+    "description": "",
+    "tags": [],
+    "name": "404",
+    "title": "Article not found.",
+    "published": false,
+    "dateAdded": "2025-12-19T05:57:13.531Z"
+  },
+  {
+    "id": "w2jw3vjIgFcpjrmo",
+    "description": "",
+    "tags": [],
+    "name": "about",
+    "title": "Whats this all'bout?",
+    "published": true,
+    "dateAdded": "2025-12-19T05:57:13.532Z"
+  },
+  {
+    "id": "wDje3njxg2cnjZmT",
+    "description": "",
+    "tags": [],
+    "name": "code-guidish",
+    "title": "Code/Style guidelines",
+    "published": true,
+    "dateAdded": "2025-12-19T05:57:13.532Z"
+  },
+  {
+    "id": "wVjz34jxggcejlmR",
+    "description": "",
+    "tags": [],
+    "name": "dry-kiss",
+    "title": "Dry kiss Yagni ASAP.",
+    "published": true,
+    "dateAdded": "2025-12-19T05:57:13.532Z"
+  },
+  {
+    "id": "wEjI3tjog1cdjjmE",
+    "description": "",
+    "tags": [],
+    "name": "enum",
+    "title": "what about ENUM's in typescript?",
+    "published": false,
+    "dateAdded": "2025-12-19T05:57:13.532Z"
+  },
+  {
+    "id": "xOjX3IjHg5ckjImW",
+    "description": "",
+    "tags": [],
+    "name": "the-year-2038",
+    "title": "The year 2038 problem",
+    "published": true,
+    "dateAdded": "2025-12-19T05:57:13.533Z"
+  },
+  {
+    "id": "xYj937jtgycHjWm1",
+    "description": "",
+    "tags": [],
+    "name": "welcome",
+    "title": "welcome",
+    "published": false,
+    "dateAdded": "2025-12-19T05:57:13.533Z"
+  },
+  {
+    "id": "x2jb3xjzg6cgjEmn",
+    "description": "",
+    "tags": [],
+    "name": "what-is-data",
+    "title": "What is data",
+    "published": true,
+    "dateAdded": "2025-12-19T05:57:13.533Z"
+  },
+  {
+    "id": "xCgWt94YrscijEmA",
+    "description": "",
+    "tags": [],
+    "name": "angular-signals-www",
+    "title": "Angular Signals WWW",
+    "published": true,
+    "dateAdded": "2025-12-19T10:54:03.057Z"
+  },
+  {
+    "id": "rtvui0r9ycgGjLmz",
+    "description": "",
+    "tags": [],
+    "name": "use-the-platform",
+    "title": "use the platform",
+    "published": false,
+    "dateAdded": "2025-12-22T09:38:44.439Z"
+  }
+]
