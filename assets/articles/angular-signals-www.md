@@ -1,11 +1,10 @@
 # Angular Signals WWW
 
-> [!WARNING] This is a republication of an article I wrote _before_ signals where
+> [!WARNING] This is a republication of an article I wrote _before_ signals were
 > introduced in Angular. Since then the API has changed, and signals are now
 > part of Angular stable.
 
-
-In this Article, I will go into the **_Why_**, **_What_**, and **_Wherefor_** of Angular Signals. And why this is such a big deal that everyone seems to have an opinion on. How it is going to be a complementary technology to Angular, and not a replacement to anything already there. (spoiler alert: it is not a replacement for RxJS)
+In this article, I will go into the **_Why_**, **_What_**, and **_Wherefor_** of Angular Signals. And why this is such a big deal that everyone seems to have an opinion on. How it is going to be a complementary technology to Angular, and not a replacement to anything already there. (spoiler alert: it is not a replacement for RxJS)
 
 > DISCLAIMER: this is not the current API of Angular Signals. As the current API doesn't really exist just yet. Yes, there is a POC implementation, but it is not the final API. The API is still being discussed. But this is the API that I think will make it easier to read samples. And it is the API that I think will be the most intuitive to use. So, I will use it in this article. But it is not the final API, and it is also not the current implementation.
 
@@ -22,7 +21,7 @@ Ah, yes, the question that everyone is asking.
 - Why this and not my favorite feature that is missing?
 - Why is this list ending here?
 
-Well, I can not answer all of those questions. But I can answer some of them. And I will try to answer them in a way that is not just my opinion. But also in a way that is backed up by facts.
+Well, I cannot answer all of those questions. But I can answer some of them. And I will try to answer them in a way that is not just my opinion. But also in a way that is backed up by facts.
 
 #### Why not just use RxJS?
 
@@ -40,7 +39,7 @@ This directly answers the question of why not use the `async pipe`. The `async p
 
 #### Why another reactive library?
 
-Why now use X, or Y, or Z? Well, This one, I can not answer with 100% certainty. I know for a fact that the team has been looking at all kinds of implementations. Then they came up with a spec. This spec is built from knowing what is needed in Angular. And what is not. So it is built from the ground up to be a great fit for Angular. And it is built from the ground up to be a great fit for the Angular user-base. As I have been reading the code of the Angular signal POC, and the code of quite a couple of other signal implementations, and did build my own signal prototype, I can say I agree with the team on this. The tradeoffs in the other libraries are not a good fit for Angular.
+Why now use X, or Y, or Z? Well, This one, I cannot answer with 100% certainty. I know for a fact that the team has been looking at all kinds of implementations. Then they came up with a spec. This spec is built from knowing what is needed in Angular. And what is not. So it is built from the ground up to be a great fit for Angular. And it is built from the ground up to be a great fit for the Angular user-base. As I have been reading the code of the Angular signal POC, and the code of quite a couple of other signal implementations, and did build my own signal prototype, I can say I agree with the team on this. The tradeoffs in the other libraries are not a good fit for Angular.
 
 #### Why now?
 
@@ -122,7 +121,9 @@ It is easier to show than to explain. So here is an example:
 const counter = signal(0);
 const double = computed(() => counter.value * 2);
 const triple = computed(() => double.value * 3);
-const pickOne = computed(() => (counter.value % 2 === 0 ? double.value : triple.value));
+const pickOne = computed(() =>
+  counter.value % 2 === 0 ? double.value : triple.value
+);
 
 effect(() => {
   console.log(`counter: ${counter.value}`);
@@ -153,16 +154,18 @@ class SampleComponent {
     // this is too fast for a reason.
     map(() => new Date().toISOString().split('T')[1].split('.')[0])
   );
-  color$ = this.time.pipe(map(time => (this.alarmList.includes(time) ? 'red' : 'green')));
+  color$ = this.time.pipe(
+    map(time => (this.alarmList.includes(time) ? 'red' : 'green'))
+  );
 }
 // NOTE: see disclaimer at the top.
 ```
 
-Ok, that doesn't look so bad does it? The code is nice and short. Easy digestible, and fully reactive. But there is an issue.
+Ok, that doesn't look so bad does it? The code is nice and short. Easily digestible, and fully reactive. But there is an issue.
 In this case, the observable fires every 100Ms. (Yes, it's a sample and I have control here. But in real life, I might not be able to just change the interval.) This means that the UI is updated every 100Ms, even if there is no change. Also, there are 2 subscriptions to the `time$` observable. One for the `color$` observable and one for the `time$` async pipe. And then there is a third subscription by the `color$ | async` in the template. All of those trigger change-detection.
 (Yes, I can use `distinctUntilChanged` to limit the amount of updates. And I can use `shareReplay` to get rid of an extra subscription. But that adds a load of complexity to the code and is not the point of this example.)
 
-Now lets create the same example, but with Angular Signals:
+Now let's create the same example, but with Angular Signals:
 
 ```ts
 @Component({
@@ -177,7 +180,9 @@ class SampleComponent {
       map(() => new Date().toISOString().split('T')[1].split('.')[0])
     )
   );
-  color = compute(() => (this.alarmList.includes(this.time.value) ? 'red' : 'green'));
+  color = compute(() =>
+    this.alarmList.includes(this.time.value) ? 'red' : 'green'
+  );
 }
 // NOTE: see disclaimer at the top.
 ```
@@ -210,7 +215,9 @@ class SomeComponent {
    * think of this as a alternative to the @Input decorator. but then reactive.
    * I'm casting only for the example, this will be done automatically
    */
-  customerId = futureMagicalSignalFromInput('customerId', undefined) as signal<number | undefined>;
+  customerId = futureMagicalSignalFromInput('customerId', undefined) as signal<
+    number | undefined
+  >;
 
   // make a Observable stream from a signal
   customer$ = observableFromSignal(this.customerId).pipe(
@@ -233,7 +240,9 @@ class SomeComponent {
   // use the life-cycle hook signal to do something
   destroyEffect = effect(() => {
     if (this.destroy) {
-      console.log('destroying the customer signal, while destroying the component');
+      console.log(
+        'destroying the customer signal, while destroying the component'
+      );
     }
   });
 }
